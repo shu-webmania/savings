@@ -1,0 +1,391 @@
+@charset "utf-8";
+////////////////////////////////////////////////////////////////
+// 変数
+////////////////////////////////////////////////////////////////
+// メインカラー
+$main-color: #f5a870;
+// セカンドカラー
+$second-color: #f58d42;
+//サードカラー
+$third-color: #ccc;
+// アクセントカラー
+$accent-color: linear-gradient(to right, #ff6e00, #ff8c00);
+// リンクカラー
+$link-color: #238bcd;
+// リンクテキストホバー時のカラー
+$hover-link-color: #ff6e00;
+// text-color
+$text-color: #333;
+// subTit-color
+$subTit-color: #83c3b4;
+// border-color
+$border-color: #ccc;
+// サイトフォントJP
+$basic-fonts: "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+// 明朝フォント
+$mincho-fonts: "游明朝体", "YuMincho", "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN W3", HiraMinProN-W3, "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+// 数字フォント
+$number-fonts: "Helvetica";
+/* ----------------------------------
+　 リセット
+---------------------------------- */
+* {
+  font-feature-settings: "palt";
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  font-family: $basic-fonts;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6em;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.fixed {
+  position: fixed;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+table {
+  border-spacing: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  line-height: 1.8;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+figure {
+  margin: 0;
+}
+
+input[type="text"],
+input[type="button"],
+input[type="tel"],
+input[type="email"],
+input[type="submit"],
+select,
+textarea {
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+input:-ms-input-placeholder {
+  color: #aaa;
+}
+
+input::-ms-input-placeholder {
+  color: #aaa;
+}
+
+input::-moz-placeholder {
+  color: #aaa;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+/* ----------------------------------
+　 header
+---------------------------------- */
+.header {
+  background: $main-color;
+  &__inner {
+    padding: 10px 15px;
+  }
+  &__logo {
+  }
+}
+/* ----------------------------------
+　 footer
+---------------------------------- */
+.footer {
+  background: #f4f4f4;
+  padding: 3vh 0 0 0;
+  .costBtn {
+    display: table;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2vh 2vw;
+    font-weight: bold;
+    background: $main-color;
+    line-height: 1;
+    font-size: 2.2rem;
+    border-radius: 100px;
+    color: #fff;
+  }
+}
+/* ----------------------------------
+　 共通部品
+---------------------------------- */
+main {
+  background: #f4f4f4;
+  .member {
+    padding: 5px 15px;
+    background: #eaeaea;
+    &__name {
+    }
+    &__addBtn {
+      position: relative;
+      margin: 0 0 0 20px;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
+        border: 1px solid #ccc;
+        border-radius: 100%;
+      }
+    }
+  }
+  .container {
+    padding: 3vh 3vh 0;
+  }
+  .cost {
+    background: #fff;
+    &__total {
+      width: 140px;
+      text-align: center;
+      padding: 1vh 20px;
+      line-height: 1;
+      background: $second-color;
+      display: table;
+      color: #fff;
+      font-weight: bold;
+    }
+    &__cards {
+      margin: 1vh 0 0 0;
+      padding: 0 0 0.5vh 0;
+      border-bottom: 1px solid #f2f2f2;
+      display: flex;
+    }
+    &__kindName {
+      width: 120px;
+      padding: 0 0 0 30px;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    &__last {
+      margin: 0 0 0 3vw;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    &__current {
+      margin: 0 0 0 3vw;
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: flex-end;
+    }
+    &__btn {
+      margin: 5vh auto 0;
+      padding: 3vh 0 0 0;
+      display: table;
+      border: none;
+      width: 90%;
+      text-align: center;
+      padding: 2vh 2vw;
+      font-weight: bold;
+      background: $main-color;
+      line-height: 1;
+      font-size: 2.2rem;
+      border-radius: 100px;
+      color: #fff;
+    }
+  }
+  .utility {
+    background: #fff;
+    margin: 3vh 0 0 0;
+    &__total {
+      width: 140px;
+      text-align: center;
+      padding: 1vh 20px;
+      line-height: 1;
+      background: $second-color;
+      display: table;
+      color: #fff;
+      font-weight: bold;
+    }
+    &__cards {
+      margin: 1vh 0 0 0;
+      padding: 0 0 0.5vh 0;
+      border-bottom: 1px solid #f2f2f2;
+      display: flex;
+    }
+    &__utilityName {
+      padding: 0 0 0 30px;
+      width: 100px;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    &__last {
+      margin: 0 0 0 3vw;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    &__current {
+      margin: 0 0 0 3vw;
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+  .register {
+    padding: 3vh 3vh;
+    form {
+      margin: 0;
+      label {
+        width: 20%;
+        margin: 0 4% 0 0;
+      }
+      input {
+        width: 76%;
+        border: none;
+        font-size: 1.6rem;
+      }
+      .subject {
+        background: #fff;
+        padding: 3vh 3vh 3vh;
+        border-bottom: 1px solid #f2f2f2;
+        display: flex;
+      }
+      .price {
+        background: #fff;
+        padding: 3vh 3vh 3vh;
+        border-bottom: 1px solid #f2f2f2;
+        display: flex;
+      }
+      .checkbox {
+        background: #fff;
+        padding: 3vh 3vh 3vh 2vh;
+        border-bottom: 1px solid #f2f2f2;
+        display: flex;
+        flex-wrap: wrap;
+        label {
+          width: 20%;
+          margin: 0 5% 0 0;
+        }
+        input {
+          width: inherit;
+        }
+      }
+      .add {
+        background: #fff;
+        padding: 3vh 3vh 3vh;
+        border-bottom: 1px solid #f2f2f2;
+        display: flex;
+      }
+      .member {
+        background: #fff;
+        padding: 3vh 3vh 3vh 2vh;
+        display: flex;
+        input {
+          width: inherit;
+        }
+      }
+    }
+    .register-btn {
+      padding: 3vh 0 0 0;
+      .create {
+        display: table;
+        border: none;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        padding: 2vh 2vw;
+        font-weight: bold;
+        background: $main-color;
+        line-height: 1;
+        font-size: 2.2rem;
+        border-radius: 100px;
+        color: #fff;
+      }
+    }
+  }
+  .result {
+    padding: 3vh 3vh;
+  }
+}
+@media screen and (max-width: 480px) {
+  main {
+    .cost {
+      padding: 2vh 3vw 0;
+      &__total {
+        font-size: 1.4rem;
+      }
+      &__kindName {
+        font-size: 1.6rem;
+      }
+      &__current {
+        font-size: 1.6rem;
+      }
+    }
+    .utility {
+      padding: 2vh 3vw 0;
+      &__total {
+        font-size: 1.4rem;
+      }
+      &__utilityName {
+        font-size: 1.6rem;
+      }
+      &__current {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+/* ----------------------------------
+　 トップページ
+---------------------------------- */
