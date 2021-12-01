@@ -13,10 +13,6 @@
                     echo show_member_html($term->name);
                 }
             } 
-
-            function show_member_term(){
-                
-            }
             ?>
         </span>
         <a href="<?php echo get_theme_file_uri('member.php'); ?>" class="member__addBtn">+</a>
