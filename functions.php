@@ -89,9 +89,12 @@ function remove_cssjs_ver($src)
 }
 add_filter('style_loader_src', 'remove_cssjs_ver', 9999);
 
-/* -------------------------------------------
-   デバック関数
--------------------------------------------*/
+/**
+ * debug
+ * デバック
+ * @param string
+ * $val:表示させたいもの
+ */
 function debug($val) 
 {
     print '<pre>';
@@ -99,9 +102,13 @@ function debug($val)
     print '</pre>';
 }
 
-/* -------------------------------------------
-   出費タームごとの投稿取得
--------------------------------------------*/
+/**
+ * get_post_by_kind_term
+ * 出費タームごとの投稿取得
+ * @param object
+ * $term:ターム情報
+ * @return object WP_Query
+ */
 function get_post_by_kind_term($term){
 	$kind_args = '';
 	$kind_args = array(
@@ -116,9 +123,13 @@ function get_post_by_kind_term($term){
 	return $post_by_term;
 }
 
-/* -------------------------------------------
-   固定費タームごとの投稿取得
--------------------------------------------*/
+/**
+ * get_post_by_utility_term
+ * 固定費タームごとの投稿取得
+ * @param object
+ * $term:ターム情報
+ * @return object WP_Query
+ */
 function get_post_by_utility_term($term){
 	$utility_args = '';
 	$utility_args = array(
@@ -133,9 +144,11 @@ function get_post_by_utility_term($term){
 	return $post_by_term;
 }
 
-/* -------------------------------------------
-   今月の出費を取得
--------------------------------------------*/
+/**
+ * get_post_current_cost
+ * 今月費用取得
+ * @return string
+ */
 function get_post_current_cost(){
 	$current_month = date('m',strtotime('+9hour')); //今月を取得
 	$post_month = get_the_date('m'); 
@@ -146,9 +159,11 @@ function get_post_current_cost(){
 	return $price_current;
 }
 
-/* -------------------------------------------
-   先月の出費を取得
--------------------------------------------*/
+/**
+ * get_post_last_cost
+ * 先月費用取得
+ * @return string
+ */
 function get_post_last_cost(){
 	$last_month = date('m', strtotime(date('Y-m-1').' -1 month')); //先月を取得
 	$post_month = get_the_date('m'); 
@@ -159,10 +174,16 @@ function get_post_last_cost(){
 	return $price_last;
 }
 
-/* -------------------------------------------
-   トップページ出費合計表示html
--------------------------------------------*/
-function show_cost_html($termName,$totalLast,$totalCurrent){
+/**
+ * get_cost_html
+ * トップページ出費合計表示html
+ * @param string
+ * $termName:名前
+ * $termLast:先月金額
+ * $termCurrent:今月金額
+ * @return string
+ */
+function get_cost_html($termName,$totalLast,$totalCurrent){
 	$html = '';
 	$html .= '<div class="cost__cards">';
 	$html .= '<span class="cost__kindName">' . $termName . '</span>';
@@ -172,9 +193,13 @@ function show_cost_html($termName,$totalLast,$totalCurrent){
 	return $html;
 }
 
-/* -------------------------------------------
-   メンバータームごとの投稿取得
--------------------------------------------*/
+/**
+ * get_post_by_member_term
+ * メンバータームごとの投稿取得
+ * @param object
+ * $term:ターム情報
+ * @return object WP_Query
+ */
 function get_post_by_member_term($term){
 	$member_args = '';
 	$member_args = array(
@@ -188,29 +213,59 @@ function get_post_by_member_term($term){
 	$post_by_term = new WP_Query($kind_args);  
 	return $post_by_term;
 }
-/* -------------------------------------------
-  ターム分解
--------------------------------------------*/
+
+/**
+ * split_terms
+ * ターム分解
+ * @param object
+ * $term:ターム情報
+ * @return string
+ */
 function split_terms($term){
 	$term_slug = $term->slug; 
 	$term_core = explode( "-" , $term_slug ); //タームスラッグ分解
 	return $term_core;
 }
 
-/* -------------------------------------------
-   トップページメンバー表示html
--------------------------------------------*/
-function show_member_html($val){
+/**
+ * show_member_term
+ * 登録済みメンバー表示
+ * @return string
+ */
+function show_member_term(){
+	$user = wp_get_current_user(); //現在のログイン中ユーザー情報取得
+	$userName = $user->display_name; //ユーザー名    
+	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
+	foreach( $member_terms as $term){
+		$term_core = split_terms($term);
+		if($userName == $term_core[1]){
+			return get_member_html($term->name);
+		}
+	} 
+}
+
+
+/**
+ * show_member_html
+ * メンバーレコード生成
+ * @param string
+ * $name:メンバー名
+ * @return $html
+ */
+function get_member_html($name){
 	$html = '';
-	$html .= '<span class="member__name">' . $val . '/' . '</span>';
+	$html .= '<span class="member__name">' . $name . '/' . '</span>';
 	return $html;
 }
 
-/* -------------------------------------------
-   トップページ出費ループ
--------------------------------------------*/
+/**
+ * show_kind_post
+ * トップページ出費用レコード生成
+ * @return $html
+ */
 function show_kind_post(){
 	$kind_terms = get_terms('kind');
+	$html = '';
 	if(!empty($kind_terms)){
 		foreach($kind_terms as $term){
 			$post_by_term = get_post_by_kind_term($term);
@@ -227,20 +282,26 @@ function show_kind_post(){
 				$total_last += intval($price_last); //先月出費計算
 			}
 			wp_reset_postdata();
-			echo show_cost_html($term->name,$total_last,$total_current);
+			$html .= get_cost_html($term->name,$total_last,$total_current);
 		}
+		return $html;
 	}else{
-		echo show_cost_html('登録なし','0','0');
-		echo show_cost_html('登録なし','0','0');
-		echo show_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		return $html;
 	}
 }
 
-/* -------------------------------------------
-   トップページ固定費ループ
--------------------------------------------*/
+/**
+ * show_utility_post
+ * トップページ固定費用レコード生成
+ * @return $html
+ */
+
 function show_utility_post(){
 	$utility_terms = get_terms('utility');
+	$html = '';
 	if(!empty($utility_terms)){
 		foreach($utility_terms as $term){
 			$post_by_term = get_post_by_utility_term($term);
@@ -257,10 +318,13 @@ function show_utility_post(){
 				$total_last += intval($price_last); //先月出費計算
 			}
 			wp_reset_postdata();
-			echo show_cost_html($term->name,$total_last,$total_current);
+			$html .= get_cost_html($term->name,$total_last,$total_current);
 		}
+		return $html;
 	}else{
-		echo show_cost_html('登録なし','0','0');
-		echo show_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		$html .= get_cost_html('登録なし','0','0');
+		return $html;
 	}
 }

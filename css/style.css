@@ -13,7 +13,7 @@ body,
 html {
   margin: 0;
   padding: 0;
-  color: #333;
+  color: #555;
   line-height: 1.8;
   font-size: 0.95rem;
   font-family: "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
@@ -68,7 +68,7 @@ p {
 
 a {
   text-decoration: none;
-  color: #333;
+  color: #555;
 }
 
 figure {
@@ -109,7 +109,7 @@ input::placeholder {
 　 header
 ---------------------------------- */
 .header {
-  background: #f5a870;
+  background: #fea463;
 }
 
 .header__inner {
@@ -131,7 +131,7 @@ input::placeholder {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #f5a870;
+  background: #fea463;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
@@ -235,7 +235,7 @@ main .cost__btn {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #f5a870;
+  background: #fea463;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
@@ -387,7 +387,7 @@ main .register .register-btn .create {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #f5a870;
+  background: #fea463;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
