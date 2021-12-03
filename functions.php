@@ -233,20 +233,22 @@ function split_terms($term){
  * @return string
  */
 function show_member_term(){
+	$html = '';
 	$user = wp_get_current_user(); //現在のログイン中ユーザー情報取得
 	$userName = $user->display_name; //ユーザー名    
 	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
 	foreach( $member_terms as $term){
 		$term_core = split_terms($term);
 		if($userName == $term_core[1]){
-			return get_member_html($term->name);
+			$html .= get_member_html($term->name);
 		}
 	} 
+	return $html;
 }
 
 
 /**
- * show_member_html
+ * get_member_html
  * メンバーレコード生成
  * @param string
  * $name:メンバー名
