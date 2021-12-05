@@ -168,6 +168,37 @@ main .member__addBtn::before {
   border-radius: 100%;
 }
 
+main .member-cost {
+  display: block;
+  margin: 5% 0 0 0;
+}
+
+main .member-cost:first-child {
+  margin: 0 0 0 0;
+}
+
+main .member-cost__name {
+  background: #fea463;
+  color: #fff;
+  padding: 5px 0 5px 3%;
+  font-weight: bold;
+}
+
+main .member-cost__total {
+  padding: 1.5% 3% 1.5%;
+  background: #fff;
+}
+
+main .member-cost__total .sum {
+  width: 120px;
+}
+
+main .member-cost__total .cost-current {
+  font-size: 1.8rem;
+  margin: 0 0 0 5%;
+  font-weight: bold;
+}
+
 main .container {
   padding: 3vh 3vh 0;
 }
@@ -204,7 +235,7 @@ main .cost__kindName {
 }
 
 main .cost__last {
-  margin: 0 0 0 3vw;
+  margin: 0 0 0 5%;
   font-size: 1.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -215,7 +246,7 @@ main .cost__last {
 }
 
 main .cost__current {
-  margin: 0 0 0 3vw;
+  margin: 0 0 0 5%;
   font-size: 1.8rem;
   font-weight: bold;
   display: -webkit-box;
@@ -244,7 +275,7 @@ main .cost__btn {
 
 main .utility {
   background: #fff;
-  margin: 3vh 0 0 0;
+  margin: 5% 0 0 0;
 }
 
 main .utility__total {
@@ -275,7 +306,7 @@ main .utility__utilityName {
 }
 
 main .utility__last {
-  margin: 0 0 0 3vw;
+  margin: 0 0 0 5%;
   font-size: 1.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -286,7 +317,7 @@ main .utility__last {
 }
 
 main .utility__current {
-  margin: 0 0 0 3vw;
+  margin: 0 0 0 5%;
   font-size: 1.8rem;
   font-weight: bold;
   display: -webkit-box;
@@ -318,7 +349,7 @@ main .register form input {
 
 main .register form .subject {
   background: #fff;
-  padding: 3vh 3vh 3vh;
+  padding: 3% 3% 3%;
   border-bottom: 1px solid #f2f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -327,7 +358,7 @@ main .register form .subject {
 
 main .register form .price {
   background: #fff;
-  padding: 3vh 3vh 3vh;
+  padding: 3% 3% 3%;
   border-bottom: 1px solid #f2f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -336,7 +367,7 @@ main .register form .price {
 
 main .register form .checkbox {
   background: #fff;
-  padding: 3vh 3vh 3vh 2vh;
+  padding: 3% 3% 3% 2%;
   border-bottom: 1px solid #f2f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -356,7 +387,7 @@ main .register form .checkbox input {
 
 main .register form .add {
   background: #fff;
-  padding: 3vh 3vh 3vh;
+  padding: 3% 3% 3%;
   border-bottom: 1px solid #f2f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -365,7 +396,7 @@ main .register form .add {
 
 main .register form .member {
   background: #fff;
-  padding: 3vh 3vh 3vh 2vh;
+  padding: 3% 3% 3% 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -89,6 +89,7 @@ function remove_cssjs_ver($src)
 }
 add_filter('style_loader_src', 'remove_cssjs_ver', 9999);
 
+
 /**
  * debug
  * デバック
@@ -187,8 +188,8 @@ function get_cost_html($termName,$totalLast,$totalCurrent){
 	$html = '';
 	$html .= '<div class="cost__cards">';
 	$html .= '<span class="cost__kindName">' . $termName . '</span>';
-	$html .= '<span class="cost__last">¥' . $totalLast .'</span>';
-	$html .= '<span class="cost__current">¥' . $totalCurrent . '</span>';
+	$html .= '<span class="cost__last">¥' . number_format($totalLast) .'</span>';
+	$html .= '<span class="cost__current">¥' . number_format($totalCurrent) . '</span>';
 	$html .= '</div>';
 	return $html;
 }
@@ -210,7 +211,7 @@ function get_post_by_member_term($term){
 		'posts_per_page' => -1,
 		'no_found_rows' => true,
 	);
-	$post_by_term = new WP_Query($kind_args);  
+	$post_by_term = new WP_Query($member_args);  
 	return $post_by_term;
 }
 
@@ -289,8 +290,6 @@ function show_kind_post(){
 		return $html;
 	}else{
 		$html .= get_cost_html('登録なし','0','0');
-		$html .= get_cost_html('登録なし','0','0');
-		$html .= get_cost_html('登録なし','0','0');
 		return $html;
 	}
 }
@@ -325,8 +324,34 @@ function show_utility_post(){
 		return $html;
 	}else{
 		$html .= get_cost_html('登録なし','0','0');
-		$html .= get_cost_html('登録なし','0','0');
-		$html .= get_cost_html('登録なし','0','0');
 		return $html;
 	}
+}
+
+
+/**
+ * show_member_cost_post
+ * archive-cost用レコード生成
+ * @return $html
+ */
+
+function show_member_cost_post(){
+	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
+	$html = '';
+        foreach($member_terms as $term){
+            $post_by_term = get_post_by_member_term($term);
+            $total_current = 0;
+            while($post_by_term->have_posts()){
+                $post_by_term->the_post();
+                $price_current = get_post_current_cost();//今月出費
+                $total_current += intval($price_current); //今月出費計算
+            }
+			$html .= '<a href="'. get_the_permalink() .'" class="member-cost">';
+			$html .= '<div class="member-cost__name">'. $term->name .'</div>';
+			$html .= '<div class="member-cost__total">';
+			$html .= '<span class="sum">合計</span><span class="cost-current">¥'. number_format($total_current) .'</span>';
+			$html .= '</div>';
+			$html .= '</a>';
+        }
+		return $html ;
 }
