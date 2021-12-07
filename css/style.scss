@@ -196,12 +196,13 @@ main {
     &__name {
       background: $main-color;
       color: #fff;
-      padding: 5px 0 5px 3%;
+      padding: 3px 0 3px 3%;
       font-weight: bold;
     }
     &__total {
-      padding: 1.5% 3% 1.5%;
+      padding: 2% 3% 2%;
       background: #fff;
+      border-bottom: 2px solid #f4f4f4;
       .sum {
         width: 120px;
       }

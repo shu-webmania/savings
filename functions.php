@@ -328,7 +328,6 @@ function show_utility_post(){
 	}
 }
 
-
 /**
  * show_member_cost_post
  * archive-cost用レコード生成
@@ -341,12 +340,13 @@ function show_member_cost_post(){
         foreach($member_terms as $term){
             $post_by_term = get_post_by_member_term($term);
             $total_current = 0;
+			$term_link = get_term_link($term->slug, 'member');
             while($post_by_term->have_posts()){
                 $post_by_term->the_post();
                 $price_current = get_post_current_cost();//今月出費
                 $total_current += intval($price_current); //今月出費計算
             }
-			$html .= '<a href="'. get_the_permalink() .'" class="member-cost">';
+			$html .= '<a href="'. $term_link .'" class="member-cost">';
 			$html .= '<div class="member-cost__name">'. $term->name .'</div>';
 			$html .= '<div class="member-cost__total">';
 			$html .= '<span class="sum">合計</span><span class="cost-current">¥'. number_format($total_current) .'</span>';
@@ -354,4 +354,65 @@ function show_member_cost_post(){
 			$html .= '</a>';
         }
 		return $html ;
+}
+
+/**
+ * get_post_by_single_member_term
+ * メンバー個人の投稿取得
+ * @param object
+ * $term:ターム情報
+ * @return object WP_Query
+ */
+function get_post_by_single_member_term($term){
+	$tag_archive = get_query_var('member');
+	$member_args = '';
+	$member_args = array(
+		'post_type' => 'cost',
+		'term' => $term->slug,
+		'tax_query' => array(
+			'relation' => 'OR',
+			array(
+				'taxonomy' => 'member',
+				'field' => 'slug',
+				'terms' => $tag_archive,
+			),
+		),
+		'orderby' => 'post_date',
+		'nopaging'  => true, 
+		'posts_per_page' => -1,
+		'no_found_rows' => true,
+	);
+	$post_by_term = new WP_Query($member_args);  
+	return $post_by_term;
+}
+
+/**
+ * show_sigle_member_cost_post
+ * taxonomy-member用レコード生成
+ * @return $html
+ */
+
+function show_single_member_cost_post(){
+	$html = '';
+	$member_terms = get_the_terms(get_the_ID(),'member');
+	foreach($member_terms as $term){
+	}
+	$post_by_term = get_post_by_single_member_term($term);
+	$total_current = 0;
+	
+	$html .= '<div class="member-cost__name">'. $term->name .'</div>';
+	while($post_by_term->have_posts()){
+		$post_by_term->the_post();
+		$price_current = get_post_current_cost();//今月出費
+		$total_current += intval($price_current); //今月出費計算
+		
+		$html .= '<div class="member-cost__total">';
+		$html .= '<div class="member-cost__total__shop">';
+		$html .= '<span class="name">'. get_the_title() .'</span><date class="date">'. get_the_date() .'</date>';
+		$html .= '</div>';
+		$html .= '<div class="member-cost__total__price">¥'. number_format($price_current) .'</div>';
+		$html .= '</div>';
+	}
+		
+	return $html ;
 }
