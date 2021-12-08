@@ -200,6 +200,12 @@ main .member-cost__total .cost-current {
   font-weight: bold;
 }
 
+main .member-cost__total__shop .date {
+  margin: 0 0 0 10px;
+  color: #777;
+  font-size: 1.4rem;
+}
+
 main .container {
   padding: 3vh 3vh 0;
 }
