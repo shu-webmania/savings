@@ -51,12 +51,7 @@ $last_month = date('n', strtotime('-1 month')); //先月を取得
                 <label for="add">分類追加:</label><input id="add" type="text" name="new" placeholder="例) 習い事" value="">
             </div>
             <div class="member">
-                <?php foreach( $member_terms as $term): 
-                    $term_name = $term->name;
-                ?>
-
-                <label><input type="radio" name="member" value="<?php echo $term_name ?>" checked="checked"><?php echo $term_name ?></label>
-                <?php endforeach; ?>
+                <?php echo show_member_list();?>
             </div>
             <div class="register-btn">
                 <button class="create" type="submit">登録</button>

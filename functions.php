@@ -416,3 +416,25 @@ function show_single_member_cost_post(){
 		
 	return $html ;
 }
+
+/**
+ * show_member_list
+ * register.phpのmember用レコード生成
+ * @return $html
+ */
+function show_member_list(){
+	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); 
+	$html = '';
+	$get_member = $_GET['member'];
+	foreach($member_terms as $term){
+		$term_name = $term->name;
+		$checked = '';//初期化
+		if($get_member == $term_name){
+			$checked = 'checked="checked"';
+		}
+		$html .= '<label>';
+		$html .= '<input type="radio" name="member" value="'. $term_name . '" '. $checked .'>'. $term_name .'';
+		$html .= '</label>';
+	}
+	return $html;
+}

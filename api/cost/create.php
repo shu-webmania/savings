@@ -25,6 +25,6 @@ if (isset($_POST['is_post'])) { //methodがpostの場合発動
 }
 
 
-wp_redirect( get_stylesheet_directory_uri() . "/result.php" ); //result.phpへリダイレクト
+wp_redirect( get_stylesheet_directory_uri() . "/register.php" ); //result.phpへリダイレクト
 exit;
 ?>
