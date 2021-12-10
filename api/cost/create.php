@@ -24,7 +24,9 @@ if (isset($_POST['is_post'])) { //methodがpostの場合発動
 	wp_set_object_terms($post_id, $_POST['member'], "member"); //メンバー情報登録
 }
 
+session_start();
+$_SESSION['flash_message'] = '<div class="session-register"><span class="subject">'.$_POST['subject'].'</span><span class="price">¥'.$_POST['price'].'</span><span class="txt">登録しました。</span></div>';
 
-wp_redirect( get_stylesheet_directory_uri() . "/register.php" ); //result.phpへリダイレクト
-exit;
+wp_redirect( get_stylesheet_directory_uri() ."/register.php?member=".$_POST['member']); //result.phpへリダイレクト
+exit();
 ?>

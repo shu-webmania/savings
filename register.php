@@ -5,7 +5,7 @@ $userName = $user->display_name; //ユーザー名
 $member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
 $current_month = date('n'); //今月を取得
 $last_month = date('n', strtotime('-1 month')); //先月を取得
-
+session_start();
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -28,6 +28,8 @@ $last_month = date('n', strtotime('-1 month')); //先月を取得
         <?php endforeach; ?>
         <a href="#" class="member__addBtn">+</a>
     </div>
+
+    <?php echo show_flash_message(); ?>
 
     <div class="register">
         <form method="POST" action="./api/cost/create.php">
