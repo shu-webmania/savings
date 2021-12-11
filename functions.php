@@ -395,59 +395,79 @@ function get_post_by_single_member_term($term){
 function show_single_member_cost_post(){
 	$html = '';
 	$member_terms = get_the_terms(get_the_ID(),'member');
-	foreach($member_terms as $term){
+	foreach((array)$member_terms as $term){
 	}
 	$post_by_term = get_post_by_single_member_term($term);
 	$total_current = 0;
+	$i = 0;
 	
 	$html .= '<div class="member-cost__name">'. $term->name .'</div>';
-	while($post_by_term->have_posts()){
-		$post_by_term->the_post();
-		$price_current = get_post_current_cost();//今月出費
-		$total_current += intval($price_current); //今月出費計算
-		
+	if($post_by_term->have_posts()){
+		while($post_by_term->have_posts()){
+			$post_by_term->the_post();
+			$price_current = get_post_current_cost();//今月出費
+			$total_current += intval($price_current); //今月出費計算
+			$i++;
+			
+			$html .= '<div class="member-cost__totalbox">';
+			$html .= '<div class="member-cost__total delete">';
+			$html .= '<div class="member-cost__total__shop">';
+			$html .= '<span class="name">'. get_the_title() .'</span><date class="date">'. get_the_date() .'</date>';
+			$html .= '</div>';
+			$html .= '<div class="member-cost__total__price">¥'. number_format($price_current) .'</div>';
+			$html .= '</div>';
+			$html .= '<div class="member-cost__delete">';
+			$html .= '<label for="delete-'. $i .'">';
+			$html .= '削除<input id="delete-'. $i .'" type="checkbox" name="delete[]" onclick="test1()" value=' .get_the_ID(). '>';
+			$html .= '</label>';
+			$html .= '</div>';
+			$html .= '</div>';
+		}
+	}else{
+		$html .= '<div class="member-cost__name">'. single_term_title('',false) .'</div>';
+		$html .= '<div class="member-cost__totalbox">';
 		$html .= '<div class="member-cost__total">';
 		$html .= '<div class="member-cost__total__shop">';
-		$html .= '<span class="name">'. get_the_title() .'</span><date class="date">'. get_the_date() .'</date>';
+		$html .= '<span class="name">登録なし</span><date class="date">'. get_the_date() .'</date>';
 		$html .= '</div>';
-		$html .= '<div class="member-cost__total__price">¥'. number_format($price_current) .'</div>';
+		$html .= '<div class="member-cost__total__price">¥0</div>';
+		$html .= '</div>';
 		$html .= '</div>';
 	}
-		
-	return $html ;
+return $html ;
 }
 
 /**
- * show_member_list
- * register.phpのmember用レコード生成
- * @return $html
- */
+* show_member_list
+* register.phpのmember用レコード生成
+* @return $html
+*/
 function show_member_list(){
-	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); 
-	$html = '';
-	$get_member = $_GET['member'];
-	foreach($member_terms as $term){
-		$term_name = $term->name;
-		$checked = '';//初期化
-		if($get_member == $term_name){
-			$checked = 'checked="checked"';
-		}
-		$html .= '<label>';
-		$html .= '<input type="radio" name="member" value="'. $term_name . '" '. $checked .'>'. $term_name .'';
-		$html .= '</label>';
-	}
-	return $html;
+$member_terms = get_terms( 'member', array( 'hide_empty'=>false));
+$html = '';
+$get_member = $_GET['member'];
+foreach($member_terms as $term){
+$term_name = $term->name;
+$checked = '';//初期化
+if($get_member == $term_name){
+$checked = 'checked="checked"';
+}
+$html .= '<label>';
+    $html .= '<input type="radio" name="member" value="'. $term_name . '" '. $checked .'>'. $term_name .'';
+    $html .= '</label>';
+}
+return $html;
 }
 
 /**
- * show_flash_message
- * show_flash_messageのレコード生成
- * @return $html
- */
+* show_flash_message
+* show_flash_messageのレコード生成
+* @return $html
+*/
 function show_flash_message(){
-	if(isset($_SESSION['flash_message']) && !empty($_SESSION['flash_message'])){
-		$html = $_SESSION['flash_message']; 
-		unset($_SESSION['flash_message']);
-		return $html;
-	}
+if(isset($_SESSION['flash_message']) && !empty($_SESSION['flash_message'])){
+$html = $_SESSION['flash_message'];
+unset($_SESSION['flash_message']);
+return $html;
+}
 }

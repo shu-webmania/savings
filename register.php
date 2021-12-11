@@ -1,33 +1,12 @@
 <?php
 require_once( dirname( __DIR__, 3 ) . '/wp-blog-header.php' );
-$user = wp_get_current_user(); //現在のログインユーザー取得
-$userName = $user->display_name; //ユーザー名
-$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
-$current_month = date('n'); //今月を取得
-$last_month = date('n', strtotime('-1 month')); //先月を取得
 session_start();
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php get_header(); ?>
 <main>
-    <div class="member">
-        <span class="member_tit">共有メンバー:</span>
-        <?php foreach( $member_terms as $term): 
-      $term_name = $term->name; //ターム名
-      $term_slug = $term->slug; //タームスラッグ
-      $term_core = explode( "-" , $term_slug ); //タームスラッグ分解
-    ?>
-        <?php 
-    if( $userName == $term_core[1] ) : //ログイン中のユーザーとタームを照合
-    ?>
-        <span class="member__name">
-            <?php echo $term_name ?>,
-        </span>
-        <?php endif; ?>
-        <?php endforeach; ?>
-        <a href="#" class="member__addBtn">+</a>
-    </div>
+    <?php get_template_part('part','member'); ?>
 
     <?php echo show_flash_message(); ?>
 

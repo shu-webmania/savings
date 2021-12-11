@@ -190,7 +190,10 @@ main {
   .member-cost {
     display: block;
     margin: 5% 0 0 0;
-    &:first-child {
+    &.taxonomy {
+      margin: 0 0 0 0;
+    }
+    &:nth-child(1) {
       margin: 0 0 0 0;
     }
     &__name {
@@ -199,10 +202,42 @@ main {
       padding: 3px 0 3px 3%;
       font-weight: bold;
     }
+    &__totalbox {
+      display: flex;
+    }
+    &__delete {
+      &.active {
+        background: #f97474;
+        label {
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+      background: #dfdfdf;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid #d5d5d5;
+      label {
+        height: 100%;
+        font-size: 1.4rem;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+      }
+    }
     &__total {
+      width: 100%;
+      &.delete {
+        width: 95%;
+      }
       padding: 2% 3% 2%;
       background: #fff;
-      border-bottom: 2px solid #f4f4f4;
+      border-bottom: 2px solid #e7e7e7;
       .sum {
         width: 120px;
       }
