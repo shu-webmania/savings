@@ -16,8 +16,8 @@ $stylesheet_uri = get_stylesheet_directory_uri();
 <body <?php body_class(); ?>>
     <header id="header" class="header">
         <div class="header__inner">
-            <div class="header__logo">
+            <a href="<?php echo home_url('/');?>" class="header__logo">
                 <img src="" alt="節約の達人">
-            </div>
+            </a>
         </div>
     </header><!-- #header -->

@@ -187,11 +187,44 @@ main {
       }
     }
   }
+  .session-register {
+    padding: 7px 15px;
+    margin: 0 0 10px 0;
+    box-shadow: 1px 1px 2px rgba(145, 145, 145, 0.112);
+    background: #fff;
+    color: #e16e36;
+    font-weight: bold;
+    border-radius: 5px;
+    .subject {
+      margin: 0 1.5% 0 0;
+    }
+    .price {
+      margin: 0 1.5% 0 0;
+    }
+  }
+  .delete-btn {
+    display: none;
+    border: none;
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 2vh 2vw;
+    font-weight: bold;
+    background: #f97474;
+    line-height: 1;
+    font-size: 2.2rem;
+    border-radius: 10px;
+    color: #fff;
+    &.visible {
+      display: block;
+    }
+  }
   .member-cost {
     display: block;
     margin: 5% 0 0 0;
     &.taxonomy {
       margin: 0 0 0 0;
+      overflow: scroll;
     }
     &:nth-child(1) {
       margin: 0 0 0 0;

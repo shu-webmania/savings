@@ -418,7 +418,7 @@ function show_single_member_cost_post(){
 			$html .= '</div>';
 			$html .= '<div class="member-cost__delete">';
 			$html .= '<label for="delete-'. $i .'">';
-			$html .= '削除<input id="delete-'. $i .'" type="checkbox" name="delete[]" onclick="test1()" value=' .get_the_ID(). '>';
+			$html .= '削除<input id="delete-'. $i .'" type="checkbox" name="delete[]" onclick="onOff(this)" value=' .get_the_ID(). '>';
 			$html .= '</label>';
 			$html .= '</div>';
 			$html .= '</div>';

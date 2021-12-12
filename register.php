@@ -8,9 +8,9 @@ session_start();
 <main>
     <?php get_template_part('part','member'); ?>
 
-    <?php echo show_flash_message(); ?>
 
     <div class="register">
+        <?php echo show_flash_message(); ?>
         <form method="POST" action="./api/cost/create.php">
             <input type="hidden" name="is_post" value="1"><!-- プログラム制御用 -->
             <div class="subject">
