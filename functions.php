@@ -465,9 +465,9 @@ return $html;
 * @return $html
 */
 function show_flash_message(){
-if(isset($_SESSION['flash_message']) && !empty($_SESSION['flash_message'])){
-$html = $_SESSION['flash_message'];
-unset($_SESSION['flash_message']);
-return $html;
-}
+	if(isset($_SESSION['flash_message']) && !empty($_SESSION['flash_message'])){
+		$html = $_SESSION['flash_message'];
+		unset($_SESSION['flash_message']);
+		return $html;
+	}
 }
