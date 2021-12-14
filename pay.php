@@ -11,6 +11,7 @@ get_header();
         function show_member_cost_pay_post(){
             $member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
             $html = '';
+            $sum = 0;
                 foreach($member_terms as $term){
                     $post_by_term = get_post_by_member_term($term);
                     $total_current = 0;
@@ -18,7 +19,7 @@ get_header();
                     while($post_by_term->have_posts()){
                         $post_by_term->the_post();
                         $price_current = get_post_current_cost();//今月出費
-                        $total_current += intval($price_current); //今月出費計算
+                        $sum += intval($price_current); //今月出費計算
                     }
                     $html .= '<a href="'. $term_link .'" class="member-cost">';
                     $html .= '<div class="member-cost__name">'. $term->name .'</div>';
