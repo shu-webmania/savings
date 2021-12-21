@@ -11,6 +11,7 @@ get_header();
         function show_member_cost_pay_post(){
             $member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
             $sum = 0;
+            $members =[];
             foreach($member_terms as $term){
                 $post_by_term = get_post_by_member_term($term);
                 $total_current = 0;
@@ -21,13 +22,14 @@ get_header();
                     $total_current += intval($price_current); //今月出費計算
                     $sum += intval($price_current); //今月出費計算
                 }
-                $info_box = [
-                    "name" => $term->name,                
-                    "sum" => $sum,                                          
-                    "price" => $total_current,                                          
-                ];
-                debug($info_box);
+                $members[$term->name] = [
+                    "price" => $total_current
+                ];    
             }
+            foreach($members as $key => $val){           
+                $members[$key]["allPrice"] = $total_current;
+            }
+            debug($members);
             return $html ;
         }
         echo show_member_cost_pay_post();
