@@ -213,7 +213,7 @@ main .member-cost {
 
 main .member-cost.taxonomy {
   margin: 0 0 0 0;
-  overflow: scroll;
+  overflow: auto;
 }
 
 main .member-cost:nth-child(1) {
