@@ -8,7 +8,10 @@ get_header();
 
     <div class="container">
         <div class="member-cost__name">支払い</div>
-        <?php echo show_member_cost_pay_post(); ?>
+        <div class="member-cost__total">
+            <?php echo show_member_cost_pay_post(); ?>
+        </div>
+        <a href="<?php echo home_url("/"); ?>" class="cost__btn">ホームへ戻る</a>
     </div>
 </main>
 

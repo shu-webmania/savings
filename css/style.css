@@ -116,6 +116,10 @@ input::placeholder {
   padding: 10px 15px;
 }
 
+.header__logo {
+  text-align: center;
+}
+
 /* ----------------------------------
 　 footer
 ---------------------------------- */
@@ -305,6 +309,15 @@ main .member-cost__total__shop .date {
   margin: 0 0 0 10px;
   color: #777;
   font-size: 1.4rem;
+}
+
+main .member-cost__total__arrow {
+  margin: 0 5px 0 5px;
+}
+
+main .member-cost__total__cost {
+  margin: 0 0 0 30px;
+  font-weight: bold;
 }
 
 main .container {

@@ -139,6 +139,7 @@ input::placeholder {
     padding: 10px 15px;
   }
   &__logo {
+    text-align: center;
   }
 }
 /* ----------------------------------
@@ -265,12 +266,12 @@ main {
     }
     &__total {
       width: 100%;
-      &.delete {
-        width: 95%;
-      }
       padding: 2% 3% 2%;
       background: #fff;
       border-bottom: 2px solid #e7e7e7;
+      &.delete {
+        width: 95%;
+      }
       .sum {
         width: 120px;
       }
@@ -289,6 +290,15 @@ main {
         }
       }
       &__price {
+      }
+      &__name {
+      }
+      &__arrow {
+        margin: 0 5px 0 5px;
+      }
+      &__cost {
+        margin: 0 0 0 30px;
+        font-weight: bold;
       }
     }
   }
