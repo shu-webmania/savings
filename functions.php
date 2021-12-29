@@ -366,6 +366,8 @@ function show_member_cost_post(){
 function get_post_by_single_member_term($term){
 	$tag_archive = get_query_var('member');
 	$member_args = '';
+	$get_year = date('y');
+	$get_month = date('m',strtotime('+9hour'));
 	$member_args = array(
 		'post_type' => 'cost',
 		'term' => $term->slug,
@@ -377,12 +379,25 @@ function get_post_by_single_member_term($term){
 				'terms' => $tag_archive,
 			),
 		),
+		'date_query' => array(
+			array(
+				'after' => array(
+					'year' => '20'.$get_year,
+					'month' => $get_month,
+				),
+				'before' => array(
+					'year' => '20'.$get_year,
+					'month' => $get_month,
+				),
+				'inclusive' => true,
+			),
+		),
 		'orderby' => 'post_date',
 		'nopaging'  => true, 
 		'posts_per_page' => -1,
 		'no_found_rows' => true,
 	);
-	$post_by_term = new WP_Query($member_args);  
+	$post_by_term = new WP_Query($member_args);
 	return $post_by_term;
 }
 
@@ -424,11 +439,10 @@ function show_single_member_cost_post(){
 			$html .= '</div>';
 		}
 	}else{
-		$html .= '<div class="member-cost__name">'. single_term_title('',false) .'</div>';
 		$html .= '<div class="member-cost__totalbox">';
 		$html .= '<div class="member-cost__total">';
 		$html .= '<div class="member-cost__total__shop">';
-		$html .= '<span class="name">登録なし</span><date class="date">'. get_the_date() .'</date>';
+		$html .= '<span class="name">登録なし</span>';
 		$html .= '</div>';
 		$html .= '<div class="member-cost__total__price">¥0</div>';
 		$html .= '</div>';
