@@ -500,13 +500,12 @@ function show_member_cost_pay_post(){
 			$ave = intval(round($sum/2));  
 			$members[0]["pay"] = $ave - $members[0]["price"];
 			$members[1]["pay"] = $ave - $members[1]["price"];
-			debug($members);
 			if($members[0]["price"] < $members[1]["price"]){
 				$html ='';
-				$html = $members[0]["name"].'から'.$members[1]["name"].'へ'. number_format($members[0]["pay"]) .'円支払う'; 
+				$html = $members[0]["name"].'→'.$members[1]["name"]. number_format($members[0]["pay"]) .'円支払う'; 
 			}elseif($members[1]["price"] < $members[0]["price"]){
 				$html ='';
-				$html = $members[1]["name"].'から'.$members[0]["name"].'へ'. number_format($members[1]["pay"]) .'円支払う'; 
+				$html = $members[1]["name"].'→'.$members[0]["name"]. number_format($members[1]["pay"]) .'円支払う'; 
 			}else{
 				$html ='';
 				$html = '支払い必要なし';
