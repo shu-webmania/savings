@@ -11,6 +11,9 @@ function disable_autosave() {
   }
   add_action( 'wp_print_scripts', 'disable_autosave' );
 
+  //ツールバー非表示
+  add_filter('show_admin_bar', '__return_false');
+
   /* -------------------------------------------
    cssの読み込みに関する記述
 -------------------------------------------*/
@@ -111,9 +114,11 @@ function debug($val)
  * @return object WP_Query
  */
 function get_post_by_kind_term($term){
+	$user_id = get_current_user_id(); 
 	$kind_args = '';
 	$kind_args = array(
 		'post_type' => 'cost',
+		'author' => $user_id,
 		'taxonomy' => 'kind',
 		'term' => $term->slug,
 		'nopaging'  => true, 
@@ -132,9 +137,11 @@ function get_post_by_kind_term($term){
  * @return object WP_Query
  */
 function get_post_by_utility_term($term){
+	$user_id = get_current_user_id(); 
 	$utility_args = '';
 	$utility_args = array(
 		'post_type' => 'cost',
+		'author' => $user_id,
 		'taxonomy' => 'utility',
 		'term' => $term->slug,
 		'nopaging'  => true, 
@@ -153,7 +160,6 @@ function get_post_by_utility_term($term){
 function get_post_current_cost(){
 	$current_month = date('m',strtotime('+9hour')); //今月を取得
 	$post_month = get_the_date('m'); 
-	
 	if( $post_month == $current_month ){
 		$price_current = get_post_meta( get_the_ID(), 'price', true ); //今月金額を取得
 	} 
@@ -168,7 +174,6 @@ function get_post_current_cost(){
 function get_post_last_cost(){
 	$last_month = date('m', strtotime(date('Y-m-1').' -1 month')); //先月を取得
 	$post_month = get_the_date('m'); 
-	
 	if( $post_month == $last_month ){
 		$price_last = get_post_meta( get_the_ID(), 'price', true ); //先月金額を取得
 	} 
@@ -202,9 +207,11 @@ function get_cost_html($termName,$totalLast,$totalCurrent){
  * @return object WP_Query
  */
 function get_post_by_member_term($term){
+	$user_id = get_current_user_id(); 
 	$member_args = '';
 	$member_args = array(
 		'post_type' => 'cost',
+		'author' => $user_id,
 		'taxonomy' => 'member',
 		'term' => $term->slug,
 		'nopaging'  => true, 
@@ -274,7 +281,6 @@ function show_kind_post(){
 			$post_by_term = get_post_by_kind_term($term);
 			$total_current = 0;
 			$total_last = 0;
-			
 			while($post_by_term->have_posts()){
 				$post_by_term->the_post();
 				
@@ -299,7 +305,6 @@ function show_kind_post(){
  * トップページ固定費用レコード生成
  * @return $html
  */
-
 function show_utility_post(){
 	$utility_terms = get_terms('utility');
 	$html = '';
@@ -333,25 +338,29 @@ function show_utility_post(){
  * archive-cost用レコード生成
  * @return $html
  */
-
 function show_member_cost_post(){
-	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
+	$user = wp_get_current_user(); //現在のログイン中ユーザー情報取得
+	$userName = $user->display_name; //ユーザー名 
+	$member_terms = get_terms( 'member', array('hide_empty'=>false)); //メンバーターム取得
 	$html = '';
         foreach($member_terms as $term){
-            $post_by_term = get_post_by_member_term($term);
-            $total_current = 0;
-			$term_link = get_term_link($term->slug, 'member');
-            while($post_by_term->have_posts()){
-                $post_by_term->the_post();
-                $price_current = get_post_current_cost();//今月出費
-                $total_current += intval($price_current); //今月出費計算
-            }
-			$html .= '<a href="'. $term_link .'" class="member-cost">';
-			$html .= '<div class="member-cost__name">'. $term->name .'</div>';
-			$html .= '<div class="member-cost__total">';
-			$html .= '<span class="sum">合計</span><span class="cost-current">¥'. number_format($total_current) .'</span>';
-			$html .= '</div>';
-			$html .= '</a>';
+			$term_core = split_terms($term);
+			if($userName == $term_core[1]){
+				$post_by_term = get_post_by_member_term($term);
+				$total_current = 0;
+				$term_link = get_term_link($term->slug, 'member');
+				while($post_by_term->have_posts()){
+					$post_by_term->the_post();
+					$price_current = get_post_current_cost();//今月出費
+					$total_current += intval($price_current); //今月出費計算
+				}
+				$html .= '<a href="'. $term_link .'" class="member-cost">';
+				$html .= '<div class="member-cost__name">'. $term->name .'</div>';
+				$html .= '<div class="member-cost__total">';
+				$html .= '<span class="sum">合計</span><span class="cost-current">¥'. number_format($total_current) .'</span>';
+				$html .= '</div>';
+				$html .= '</a>';
+			}
         }
 		return $html ;
 }
@@ -368,8 +377,10 @@ function get_post_by_single_member_term($term){
 	$member_args = '';
 	$get_year = date('y');
 	$get_month = date('m',strtotime('+9hour'));
+	$user_id = get_current_user_id(); 
 	$member_args = array(
 		'post_type' => 'cost',
+		'author' => $user_id,
 		'term' => $term->slug,
 		'tax_query' => array(
 			'relation' => 'OR',
@@ -406,7 +417,6 @@ function get_post_by_single_member_term($term){
  * taxonomy-member用レコード生成
  * @return $html
  */
-
 function show_single_member_cost_post(){
 	$html = '';
 	$member_terms = get_the_terms(get_the_ID(),'member');
@@ -416,7 +426,7 @@ function show_single_member_cost_post(){
 	$total_current = 0;
 	$i = 0;
 	
-	$html .= '<div class="member-cost__name">'. $term->name .'</div>';
+	$html .= '<div class="member-cost__name">'. single_term_title('',false) .'</div>';
 	if($post_by_term->have_posts()){
 		while($post_by_term->have_posts()){
 			$post_by_term->the_post();
@@ -457,20 +467,25 @@ return $html ;
 * @return $html
 */
 function show_member_list(){
-$member_terms = get_terms( 'member', array( 'hide_empty'=>false));
-$html = '';
-$get_member = $_GET['member'];
-foreach($member_terms as $term){
-$term_name = $term->name;
-$checked = '';//初期化
-if($get_member == $term_name){
-$checked = 'checked="checked"';
-}
-$html .= '<label>';
-    $html .= '<input type="radio" name="member" value="'. $term_name . '" '. $checked .'>'. $term_name .'';
-    $html .= '</label>';
-}
-return $html;
+	$user = wp_get_current_user(); //現在のログイン中ユーザー情報取得
+	$userName = $user->display_name; //ユーザー名  
+	$member_terms = get_terms( 'member', array( 'hide_empty'=>false));
+	$html = '';
+	$get_member = $_GET['member'];
+	foreach($member_terms as $term){
+		$term_core = split_terms($term);
+		$term_name = $term->name;
+		$checked = '';//初期化
+		if($get_member == $term_name){
+			$checked = 'checked="checked"';
+		}
+		if($userName == $term_core[1]){
+			$html .= '<label>';
+			$html .= '<input type="radio" name="member" value="'. $term_name . '" '. $checked .'>'. $term_name .'';
+			$html .= '</label>';	
+		}
+	}
+	return $html;
 }
 
 /**

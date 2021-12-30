@@ -623,9 +623,8 @@ main .result {
   main .register form {
     font-size: 1.4rem;
   }
+  main .register form input {
+    font-size: 1.4rem;
+  }
 }
-
-/* ----------------------------------
-　 トップページ
----------------------------------- */
 /*# sourceMappingURL=style.css.map */
