@@ -16,21 +16,8 @@ $stylesheet_uri = get_stylesheet_directory_uri();
 <body <?php body_class(); ?>>
     <header id="header" class="header">
         <div class="header__inner">
-            <?php 
-            function show_header_btn(){
-                $html ='';
-                if(is_home() || is_front_page()){
-                $html .= '<a href="'. home_url('/').'" class="header__logo">';
-                $html .= '<img src="" alt="節約の達人">';
-                $html .= '</a>';
-            }else{
-                
-            }
-            return $html;
-            }
-            ?>
-            <a href="<?php echo home_url('/');?>" class="header__logo">
-                <img src="" alt="節約の達人">
-            </a>
+            <?php echo show_header_btn();?>
+            <div class="header__logo"><img src="" alt="節約の達人"></div>
+            <a href="<?php echo home_url('/');?>" class="new-btn">新規作成</a>
         </div>
     </header><!-- #header -->

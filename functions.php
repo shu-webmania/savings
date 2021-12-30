@@ -257,7 +257,7 @@ function show_member_term(){
  */
 function get_member_html($name){
 	$html = '';
-	$html .= '<span class="member__name">' . $name . '/' . '</span>';
+	$html .= '<span class="member__name">' . $name . ',' . '</span>';
 	return $html;
 }
 
@@ -527,5 +527,20 @@ function show_member_cost_pay_post(){
 		}
 		$i++;
 	}
-	return $html ;
+	return $html;
+}
+
+/**
+* show_header_btn
+* トップページheaderbtnレコード生成
+* @return $html
+*/
+function show_header_btn(){
+	$html ='';
+	if(is_front_page() || is_home()){
+		$html .= '<a href="'.get_template_directory_uri().'/pay.php'.'" class="back-btn">精算する</a>';
+	}else{
+		$html .= '<a href="'.home_url('/').'" class="back-btn">TOP</a>';
+	}
+	return $html;
 }

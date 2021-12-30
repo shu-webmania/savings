@@ -11,7 +11,7 @@ get_header();
         <div class="member-cost__total">
             <?php echo show_member_cost_pay_post(); ?>
         </div>
-        <a href="<?php echo home_url("/"); ?>" class="cost__btn">ホームへ戻る</a>
+        <a href="<?php echo home_url('/'); ?>" class="cost__btn">ホームへ戻る</a>
     </div>
 </main>
 

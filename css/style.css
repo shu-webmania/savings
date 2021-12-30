@@ -109,15 +109,59 @@ input::placeholder {
 　 header
 ---------------------------------- */
 .header {
-  background: #fea463;
+  background: #8cc78f;
 }
 
 .header__inner {
-  padding: 10px 15px;
+  padding: 8px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.header__logo {
-  text-align: center;
+.header__inner .back-btn {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #fff;
+  padding: 0 0 0 25px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__inner .back-btn::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: solid 1px #fff;
+  border-right: solid 1px #fff;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-135deg);
+          transform: translateY(-50%) rotate(-135deg);
+  left: 10px;
+}
+
+.header__inner .new-btn {
+  font-size: 1.4rem;
+  background: #fff;
+  display: block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  color: #77af9c;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.132);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.132);
 }
 
 /* ----------------------------------
@@ -135,7 +179,7 @@ input::placeholder {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #fea463;
+  background: #8cc78f;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
@@ -152,24 +196,6 @@ main {
 main .member {
   padding: 5px 15px;
   background: #eaeaea;
-}
-
-main .member__addBtn {
-  position: relative;
-  margin: 0 0 0 20px;
-}
-
-main .member__addBtn::before {
-  content: "";
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 22px;
-  height: 22px;
-  border: 1px solid #ccc;
-  border-radius: 100%;
 }
 
 main .session-register {
@@ -225,7 +251,7 @@ main .member-cost:nth-child(1) {
 }
 
 main .member-cost__name {
-  background: #fea463;
+  background: #8cc78f;
   color: #fff;
   padding: 3px 0 3px 3%;
   font-weight: bold;
@@ -333,7 +359,7 @@ main .cost__total {
   text-align: center;
   padding: 1vh 20px;
   line-height: 1;
-  background: #f58d42;
+  background: #77af9c;
   display: table;
   color: #fff;
   font-weight: bold;
@@ -357,7 +383,7 @@ main .cost__kindName {
 
 main .cost__last {
   margin: 0 0 0 5%;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -387,7 +413,7 @@ main .cost__btn {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #fea463;
+  background: #8cc78f;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
@@ -404,7 +430,7 @@ main .utility__total {
   text-align: center;
   padding: 1vh 20px;
   line-height: 1;
-  background: #f58d42;
+  background: #77af9c;
   display: table;
   color: #fff;
   font-weight: bold;
@@ -460,6 +486,7 @@ main .register form {
 main .register form label {
   width: 20%;
   margin: 0 4% 0 0;
+  white-space: nowrap;
 }
 
 main .register form input {
@@ -539,7 +566,7 @@ main .register .register-btn .create {
   text-align: center;
   padding: 2vh 2vw;
   font-weight: bold;
-  background: #fea463;
+  background: #8cc78f;
   line-height: 1;
   font-size: 2.2rem;
   border-radius: 100px;
@@ -551,29 +578,50 @@ main .result {
 }
 
 @media screen and (max-width: 480px) {
-  main .cost {
-    padding: 2vh 3vw 0;
+  main .member {
+    font-size: 1.4rem;
+    padding: 5px;
+  }
+  main .container {
+    padding: 3vh 1vh 0;
   }
   main .cost__total {
+    text-align: left;
+    width: inherit;
     font-size: 1.4rem;
   }
   main .cost__kindName {
+    width: 80px;
+    padding: 0 0 0 15px;
     font-size: 1.6rem;
   }
   main .cost__current {
     font-size: 1.6rem;
   }
-  main .utility {
-    padding: 2vh 3vw 0;
+  main .cost__last {
+    width: 60px;
   }
   main .utility__total {
+    text-align: left;
+    width: inherit;
     font-size: 1.4rem;
   }
-  main .utility__utilityName {
+  main .utility__kindName {
+    width: 80px;
+    padding: 0 0 0 15px;
     font-size: 1.6rem;
   }
   main .utility__current {
     font-size: 1.6rem;
+  }
+  main .utility__last {
+    width: 60px;
+  }
+  main .register {
+    padding: 3vh 1vh;
+  }
+  main .register form {
+    font-size: 1.4rem;
   }
 }
 

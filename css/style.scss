@@ -3,9 +3,9 @@
 // 変数
 ////////////////////////////////////////////////////////////////
 // メインカラー
-$main-color: #fea463;
+$main-color: #8cc78f;
 // セカンドカラー
-$second-color: #f58d42;
+$second-color: #77af9c;
 //サードカラー
 $third-color: #ccc;
 // アクセントカラー
@@ -136,10 +136,42 @@ input::placeholder {
 .header {
   background: $main-color;
   &__inner {
-    padding: 10px 15px;
+    padding: 8px 5px;
+    display: flex;
+    justify-content: space-between;
+    .back-btn {
+      font-size: 1.4rem;
+      line-height: 1;
+      color: #fff;
+      padding: 0 0 0 25px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-top: solid 1px #fff;
+        border-right: solid 1px #fff;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) rotate(-135deg);
+        left: 10px;
+      }
+    }
+    .new-btn {
+      font-size: 1.4rem;
+      background: #fff;
+      display: block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      color: $second-color;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.132);
+    }
   }
   &__logo {
-    text-align: center;
   }
 }
 /* ----------------------------------
@@ -171,21 +203,6 @@ main {
     padding: 5px 15px;
     background: #eaeaea;
     &__name {
-    }
-    &__addBtn {
-      position: relative;
-      margin: 0 0 0 20px;
-      &::before {
-        content: "";
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 22px;
-        height: 22px;
-        border: 1px solid #ccc;
-        border-radius: 100%;
-      }
     }
   }
   .session-register {
@@ -331,7 +348,7 @@ main {
     }
     &__last {
       margin: 0 0 0 5%;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       display: flex;
       align-items: flex-end;
     }
@@ -404,6 +421,7 @@ main {
       label {
         width: 20%;
         margin: 0 4% 0 0;
+        white-space: nowrap;
       }
       input {
         width: 76%;
@@ -475,28 +493,57 @@ main {
 }
 @media screen and (max-width: 480px) {
   main {
+    .member {
+      font-size: 1.4rem;
+      padding: 5px;
+    }
+    .container {
+      padding: 3vh 1vh 0;
+    }
     .cost {
-      padding: 2vh 3vw 0;
       &__total {
+        text-align: left;
+        width: inherit;
         font-size: 1.4rem;
       }
       &__kindName {
+        width: 80px;
+        padding: 0 0 0 15px;
         font-size: 1.6rem;
       }
       &__current {
         font-size: 1.6rem;
+      }
+      &__last {
+        width: 60px;
       }
     }
     .utility {
-      padding: 2vh 3vw 0;
       &__total {
+        text-align: left;
+        width: inherit;
         font-size: 1.4rem;
       }
-      &__utilityName {
+      &__kindName {
+        width: 80px;
+        padding: 0 0 0 15px;
         font-size: 1.6rem;
       }
       &__current {
         font-size: 1.6rem;
+      }
+      &__last {
+        width: 60px;
+      }
+    }
+    .register {
+      padding: 3vh 1vh;
+      form {
+        font-size: 1.4rem;
+        .checkbox {
+          label {
+          }
+        }
       }
     }
   }
