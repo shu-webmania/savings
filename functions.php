@@ -14,6 +14,12 @@ function disable_autosave() {
   //ツールバー非表示
   add_filter('show_admin_bar', '__return_false');
 
+  //ログイン後toppageへリダイレクト
+  function login_redirect_page() {
+	return home_url('/');
+   }
+   add_filter('login_redirect', 'login_redirect_page');
+
   /* -------------------------------------------
    cssの読み込みに関する記述
 -------------------------------------------*/
@@ -570,8 +576,3 @@ function show_header_btn(){
 	}
 	return $html;
 }
-
-function login_redirect_page() {
-	return home_url('/');
-   }
-   add_filter('login_redirect', 'login_redirect_page');

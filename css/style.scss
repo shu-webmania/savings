@@ -138,6 +138,7 @@ input::placeholder {
   &__inner {
     padding: 8px 5px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     .back-btn {
       font-size: 1.4rem;
@@ -164,6 +165,7 @@ input::placeholder {
     .new-btn {
       font-size: 1.4rem;
       background: #fff;
+      height: 100%;
       display: block;
       padding: 3px 10px;
       border-radius: 100px;
@@ -172,6 +174,21 @@ input::placeholder {
     }
   }
   &__logo {
+    text-align: center;
+    width: 38%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .header {
+    &__inner {
+      .back-btn {
+        padding: 0 0 0 20px;
+        font-size: 1.3rem;
+      }
+      .new-btn {
+        font-size: 1.3rem;
+      }
+    }
   }
 }
 /* ----------------------------------

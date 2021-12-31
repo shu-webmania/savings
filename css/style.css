@@ -117,6 +117,9 @@ input::placeholder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -156,12 +159,28 @@ input::placeholder {
 .header__inner .new-btn {
   font-size: 1.4rem;
   background: #fff;
+  height: 100%;
   display: block;
   padding: 3px 10px;
   border-radius: 100px;
   color: #77af9c;
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.132);
           box-shadow: 0 0 3px rgba(0, 0, 0, 0.132);
+}
+
+.header__logo {
+  text-align: center;
+  width: 38%;
+}
+
+@media screen and (max-width: 480px) {
+  .header__inner .back-btn {
+    padding: 0 0 0 20px;
+    font-size: 1.3rem;
+  }
+  .header__inner .new-btn {
+    font-size: 1.3rem;
+  }
 }
 
 /* ----------------------------------

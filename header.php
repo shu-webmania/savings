@@ -17,7 +17,7 @@ $stylesheet_uri = get_stylesheet_directory_uri();
     <header id="header" class="header">
         <div class="header__inner">
             <?php echo show_header_btn();?>
-            <div class="header__logo"><img src="" alt="節約の達人"></div>
+            <div class="header__logo"><img src="<?php echo $stylesheet_uri ?>/logo.svg" alt="節約の達人" width="180" height="47"></div>
             <a href="<?php echo home_url('/');?>" class="new-btn">新規作成</a>
         </div>
     </header><!-- #header -->
