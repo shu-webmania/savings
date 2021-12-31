@@ -176,6 +176,9 @@ input::placeholder {
   &__logo {
     text-align: center;
     width: 38%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 480px) {
@@ -260,6 +263,7 @@ main {
     &.taxonomy {
       margin: 0 0 0 0;
       overflow: auto;
+      height: 67vh;
     }
     &:nth-child(1) {
       margin: 0 0 0 0;

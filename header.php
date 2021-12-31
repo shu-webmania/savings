@@ -9,6 +9,7 @@ $stylesheet_uri = get_stylesheet_directory_uri();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?php bloginfo('template_directory'); ?>/favicon.ico">
     <title>節約の達人</title>
     <?php wp_head(); ?>
 </head>
