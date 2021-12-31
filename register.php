@@ -27,6 +27,7 @@ session_start();
                 <label><input class="radio" type="checkbox" name="utility" value="ガス代">ガス代</label>
                 <label><input class="radio" type="checkbox" name="utility" value="電気代">電気代</label>
                 <label><input class="radio" type="checkbox" name="utility" value="通信費">通信費</label>
+                <label><input class="radio" type="checkbox" name="utility" value="家賃">家賃</label>
             </div>
             <!-- <div class="add">
                 <label for="add">分類追加:</label><input id="add" type="text" name="new" placeholder="例) 習い事" value="">

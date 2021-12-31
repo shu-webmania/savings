@@ -15,8 +15,9 @@ if (isset($_POST['is_post'])) { //methodがpostの場合発動
 	
 	$new = $_POST['new'];
 	if (empty($new)){
-		wp_set_object_terms($post_id, $_POST['kind'], "kind"); //デフォルト出費分類登録
-		wp_set_object_terms($post_id, $_POST['utility'], "utility"); //光熱費出費分類登録
+		wp_set_object_terms($post_id, $_POST['kind'], "kind"); 
+		wp_set_object_terms($post_id, $_POST['utility'], "utility"); 
+		// wp_insert_term($_POST['kind'],'kind',array('slug' => $_POST['kind'].'-admin'));
 	}else{
 		wp_set_object_terms($post_id, $_POST['new'], "kind"); //新規出費分類登録
 	}

@@ -276,7 +276,10 @@ function get_member_html($name){
 function show_kind_post(){
 	$kind_terms = get_terms('kind');
 	$html = '';
-	if(!empty($kind_terms)){
+	foreach($kind_terms as $term){
+		$post_by_term = get_post_by_kind_term($term);
+	}
+	if(!empty($kind_terms) && $post_by_term->have_posts()){
 		foreach($kind_terms as $term){
 			$post_by_term = get_post_by_kind_term($term);
 			$total_current = 0;
@@ -308,7 +311,10 @@ function show_kind_post(){
 function show_utility_post(){
 	$utility_terms = get_terms('utility');
 	$html = '';
-	if(!empty($utility_terms)){
+	foreach($utility_terms as $term){
+		$post_by_term = get_post_by_utility_term($term);
+	}
+	if(!empty($utility_terms) && $post_by_term->have_posts()){
 		foreach($utility_terms as $term){
 			$post_by_term = get_post_by_utility_term($term);
 			$total_current = 0;
@@ -507,11 +513,15 @@ function show_flash_message(){
 * @return $html
 */
 function show_member_cost_pay_post(){
+	$user = wp_get_current_user(); //現在のログイン中ユーザー情報取得
+	$userName = $user->display_name; //ユーザー名 
 	$member_terms = get_terms( 'member', array( 'hide_empty'=>false)); //メンバーターム取得
 	$sum = 0;
 	$members =[];
 	$i = 0;
 	foreach($member_terms as $term){
+		$term_core = split_terms($term);
+		if($userName == $term_core[1]){
 		$post_by_term = get_post_by_member_term($term);
 		$total_last = 0;
 		$term_link = get_term_link($term->slug, 'member');
@@ -541,6 +551,7 @@ function show_member_cost_pay_post(){
 			}
 		}
 		$i++;
+		}
 	}
 	return $html;
 }
@@ -559,3 +570,8 @@ function show_header_btn(){
 	}
 	return $html;
 }
+
+function login_redirect_page() {
+	return home_url('/');
+   }
+   add_filter('login_redirect', 'login_redirect_page');
