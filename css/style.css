@@ -626,5 +626,9 @@ main .result {
   main .register form input {
     font-size: 1.4rem;
   }
+  main .register .session-register {
+    font-size: 1.4rem;
+    padding: 7px 3%;
+  }
 }
 /*# sourceMappingURL=style.css.map */
