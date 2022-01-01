@@ -1,8 +1,3 @@
-<?php
-$user = wp_get_current_user(); //現在のログインユーザー取得
-$userName = $user->display_name; //ユーザー名
-?>
-
 <?php get_header(); ?>
 
 <main>
