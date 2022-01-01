@@ -263,7 +263,7 @@ main {
     &.taxonomy {
       margin: 0 0 0 0;
       overflow: auto;
-      height: 67vh;
+      height: 65vh;
     }
     &:nth-child(1) {
       margin: 0 0 0 0;
@@ -533,10 +533,14 @@ main {
         font-size: 1.6rem;
       }
       &__current {
+        margin: 0 0 0 2%;
         font-size: 1.6rem;
       }
       &__last {
         width: 60px;
+      }
+      &__btn {
+        margin: 2vh auto 0;
       }
     }
     .utility {

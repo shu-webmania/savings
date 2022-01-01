@@ -387,7 +387,7 @@ function show_member_cost_post(){
 function get_post_by_single_member_term($term){
 	$tag_archive = get_query_var('member');
 	$member_args = '';
-	$get_year = date('y');
+	$get_year = date('y',strtotime('+9hour'));
 	$get_month = date('m',strtotime('+9hour'));
 	$user_id = get_current_user_id(); 
 	$member_args = array(
@@ -406,12 +406,15 @@ function get_post_by_single_member_term($term){
 			array(
 				'after' => array(
 					'year' => '20'.$get_year,
-					'month' => $get_month,
+					'month' => 1,
+					'day' => 1,
 				),
 				'before' => array(
 					'year' => '20'.$get_year,
-					'month' => $get_month,
+					'month' => 1,
+					'day' => 31,
 				),
+				'compare'=>'BETWEEN',
 				'inclusive' => true,
 			),
 		),
@@ -433,8 +436,8 @@ function show_single_member_cost_post(){
 	$html = '';
 	$member_terms = get_the_terms(get_the_ID(),'member');
 	foreach((array)$member_terms as $term){
+		$post_by_term = get_post_by_single_member_term($term);
 	}
-	$post_by_term = get_post_by_single_member_term($term);
 	$total_current = 0;
 	$i = 0;
 	
